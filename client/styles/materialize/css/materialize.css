@@ -6285,6 +6285,7 @@ input[type=text], input[type=password], input[type=email], input[type=url], inpu
     transition: color .2s; }
     .input-field .prefix.active {
       color: #26a69a; }
+    /*color: #0083BE; }*/
   .input-field .prefix ~ input, .input-field .prefix ~ textarea {
     margin-left: 3rem;
     width: 92%;
@@ -6312,6 +6313,7 @@ input[type=text], input[type=password], input[type=email], input[type=url], inpu
     border: 0;
     box-shadow: none;
     color: #444; }
+
     .input-field input[type=search]:focus + label i, .input-field input[type=search]:focus ~ .mdi-navigation-close {
       color: #444; }
   .input-field input[type=search] + label {
