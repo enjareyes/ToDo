@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "A basic to do app using Angular and Materialize",
   "main": "index.js",
+  "dependencies": {
+    "bower": "^1.4.1",
+    "express": "^4.13.1"   
+  },
   "engines": {
     "node": "0.12.2",
     "npm": "^2.1.0"
@@ -22,8 +26,5 @@
   "bugs": {
     "url": "https://github.com/enjareyes/ToDo/issues"
   },
-  "homepage": "https://github.com/enjareyes/ToDo#readme",
-  "dependencies": {
-    "express": "^4.13.1"
-  }
+  "homepage": "https://github.com/enjareyes/ToDo#readme"
 }
