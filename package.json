@@ -3,8 +3,19 @@
   "version": "1.0.0",
   "description": "A basic to do app using Angular and Materialize",
   "main": "index.js",
+  "dependencies": {
+    "bower": "^1.4.1",
+    "express": "^4.12.4"   
+  },
+  "engines": {
+    "node": "0.12.2",
+    "npm": "^2.1.0"
+  },
+  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/server.js",
+    "postinstall": "./node_modules/bower/bin/bower install"
   },
   "repository": {
     "type": "git",
