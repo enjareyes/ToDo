@@ -1,15 +1,12 @@
-<!-- <link rel='stylesheet' type='text/css' href='styles/styles.css'/>
-<link rel="stylesheet" href="styles/font-awesome/css/font-awesome.min.css">
-
-<div ng-controller="listController">
+<div>
   <h1>My List</h1> 
 
-  <div class = 'container'>
+  <div class ='container'>
 
-    <input type='text' placeholder="Add">
-    <span class="add" ng-click='addItem(item)'>
-      <i class="fa fa-plus"></i>
-    </span>
+    <div class="input-field">
+      <input type='text' placeholder="Add" ng-model='newToDo'>
+      <i class="fa fa-plus" class="add" ng-click='addItem(newToDo)'></i>
+    </div>
 
     <p class='listItem' ng-repeat='todo in listItems'>  
       {{todo.text}} 
@@ -18,5 +15,3 @@
 
   </div>
 </div>
- -->
-

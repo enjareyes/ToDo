@@ -1,8 +1,8 @@
-angular.module('app',[])
+angular.module('app')
 
 .controller('listController', function($scope, List){
   $scope.listItems = List.listItems;
-  angular.extend($scope, List)
+  angular.extend($scope, List);
 
   $scope.addItem = function(item){
     $scope.newToDo = '';
@@ -10,20 +10,19 @@ angular.module('app',[])
   }
 })
 
+.factory('List', function(){
+  var listItems = [{text:'ha',done:false}];
 
-.factory('List', function($window){
-  var listItems = [];
-
-  // var getItems = function(){
+  var getItems = function(){
     //send request to DB
-  // }
+  }
 
   var addItem = function(item){
     listItems.push({text:item,done:false});
   }
 
   return {
-    // getItems: getItems,
+    getItems: getItems,
     listItems: listItems,
     addItem: addItem  
   }
