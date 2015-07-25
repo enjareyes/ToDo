@@ -4,7 +4,6 @@
   "description": "A basic to do app using Angular and Materialize",
   "main": "index.js",
   "dependencies": {
-    "angular-route": "1.4.0",
     "bower": "^1.4.1",
     "express": "^4.13.1"   
   },
