@@ -42,5 +42,15 @@ i {
   color: #0083BE;
 }
 
+.logoutButton {
+  color: navy;
+  padding: 10px;
+}
+
+.logoutButton:hover {
+  text-decoration: underline;
+}
+
+
 
 

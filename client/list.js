@@ -11,7 +11,7 @@ angular.module('app')
 })
 
 .factory('List', function(){
-  var listItems = [{text:'ha',done:false}];
+  var listItems = []; //{text:'ha',done:false}
 
   var getItems = function(){
     //send request to DB
@@ -19,6 +19,7 @@ angular.module('app')
 
   var addItem = function(item){
     listItems.push({text:item,done:false});
+    //save to DB
   }
 
   return {
@@ -27,3 +28,20 @@ angular.module('app')
     addItem: addItem  
   }
 })
+
+.directive('ngEnter', function () {
+  return function (scope, element, attrs) {
+    element.bind("keydown keypress", function (event) {
+      if(event.which === 13) {
+        scope.$apply(function (){
+            scope.$eval(attrs.ngEnter);
+        });
+
+        event.preventDefault();
+      }
+    });
+  };
+});
+
+
+

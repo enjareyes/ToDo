@@ -1,10 +1,14 @@
+<div class='logoutButton'>
+  <a class='logoutButton' href='#/login' ng-click='logout()'>Logout</a>
+</div>
+
 <div>
   <h1>My List</h1> 
 
   <div class ='container'>
 
     <div class="input-field">
-      <input type='text' placeholder="Add" ng-model='newToDo'>
+      <input type='text' placeholder="Add" ng-model='newToDo' ng-enter='addItem(newToDo)'>
       <i class="fa fa-plus" class="add" ng-click='addItem(newToDo)'></i>
     </div>
 
