@@ -7,21 +7,27 @@ angular.module('app')
 })
 
 
-.factory('Auth', function(){
+.factory('Auth', function($http){
 
   var login = function(email,password){
     //store in local storage
     localStorage.setItem('email', email);
-    localStorage.setItem('password', password);
+
     //send to server
+    return $http.get('/login', {
+      params: { email: email, password: password }
+    }).success(function(res){
+      console.log('success in login!', res)
+      localStorage.setItem('token',res.token)
+    })
   }
 
   var logout = function(){
     localStorage.removeItem('email')
-    localStorage.removeItem('password')
   }
 
   return {
-    login: login
+    login: login,
+    logout: logout
   }
 })

@@ -19,7 +19,7 @@ angular.module('app')
 
   var addItem = function(item){
     listItems.push({text:item,done:false});
-    //save to DB
+    //send to server and save to DB
   }
 
   return {
