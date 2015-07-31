@@ -38,9 +38,9 @@ app.get('/login', function(req,res){
         bcrypt.compare(pw, result, function(err, same) {
           if (same){
             console.log("token sending!")
-            var token = jwt.encode(userObj, 'gottadodat') 
+            var token = jwt.encode({email:email,pw:hash}, 'gottadodat') 
             res.send({token: token}) 
-          } else {
+          } else { //wrong password
             res.send({token: false})
           }
         })
@@ -53,3 +53,14 @@ app.get('/login', function(req,res){
 app.post('/addItem', function(req,res){
 
 })
+
+app.get('/getItems', function(req,res){
+  
+})
+
+
+
+
+
+
+
