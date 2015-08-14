@@ -13,8 +13,8 @@
     </div>
 
     <p class='listItem' ng-repeat='todo in listItems'>  
-      {{todo.text}} 
-      <i class="fa fa-minus"></i> 
+      {{todo.item}} 
+      <i class="fa fa-minus" ng-click='removeItem(todo.item)'></i> 
     </p> 
 
   </div>

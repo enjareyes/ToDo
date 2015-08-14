@@ -1,19 +1,23 @@
 
-exports.up = function(knex, Promise) {
-  
+exports.up = function(knex, Promise) { 
   return Promise.all([
     knex.schema.createTable('doThings', function(t){
       t.increments('id').primary();
       t.string('email');
       t.string('password');
-      t.string('listItems');
+    }),
+
+    knex.schema.createTable('listItems', function(t){
+      t.increments('id').primary();
+      t.integer('userId').references('id').inTable('doThings');
+      t.string('item');
     })
   ])
-
 };
 
 exports.down = function(knex, Promise) {
   return Promise.all([
-    knex.schema.dropTable('doThings')
+    knex.schema.dropTable('doThings'),
+    knex.schema.dropTable('listItems')
   ])
 };

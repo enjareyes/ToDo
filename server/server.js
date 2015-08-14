@@ -23,16 +23,7 @@ app.get('/login', function(req,res){
     .where('email', email)
     .then(function(result){
       console.log(result)
-      if (result.length === 0){ //if user not found in db
-        db('doThings').insert({ //insert the user and their info
-          email: email,
-          password: hash
-        })
-        .then(function(result){
-          var token = jwt.encode(email, 'gottadodat'); //then issue a token
-          res.send({token: token})  //send user token
-        })
-      } else {
+      if (result.length > 0) {
         var result = result[0].password;
 
         bcrypt.compare(pw, result, function(err, same) {
@@ -50,13 +41,85 @@ app.get('/login', function(req,res){
 })
 
 
-app.post('/addItem', function(req,res){
+app.get('/signup', function(req,res){
+  var email = req.query.email,
+      pw = req.query.password,
+      salt = bcrypt.genSaltSync(10),
+      hash = bcrypt.hashSync(pw, salt);
 
+  //check DB  
+  db.select('password').from('doThings')
+    .where('email', email)
+    .then(function(result){
+      console.log(result)
+      if (result.length === 0){ //if user not found in db
+        db('doThings').insert({ //insert the user and their info
+          email: email,
+          password: hash
+        })
+        .then(function(result){
+          var token = jwt.encode(email, 'gottadodat'); //then issue a token
+          res.send({token: token})  //send user token
+        })
+      } 
+    })
 })
+
 
 app.get('/getItems', function(req,res){
-  
+  var email = req.query.email;
+
+  db('doThings').select('id')
+  .where('email', email)
+  .then(function(id){
+    var newId = id[0].id
+    db('listItems').select('*')
+    .where('userId', newId)
+    .then(function(items){
+      console.log('items',items)
+      res.send({items:items})
+    })
+  })
 })
+
+app.post('/addItem', function(req,res){
+  var item = req.query.item,
+      email = req.query.email;
+  
+  db('doThings').select('id')
+  .where('email', email)
+  .then(function(id){
+    var newId = id[0].id
+    db('listItems').insert({ 
+      item: item,
+      userId: newId
+    })
+    .then(function(){
+      res.send({added:true})
+    })
+  })
+
+})
+
+app.post('/removeItem', function(req,res){
+  var item = req.query.item,
+      email = req.query.email;
+
+  db('doThings')
+  .where('email',email)
+  .then(function(id){
+    var newId = id[0].id
+    db('listItems')
+    .where({'userId':newId, 'item': item})
+    .del()
+    .then(function(){
+      res.send({removed:true})
+    })
+  })
+})
+
+
+
 
 
 

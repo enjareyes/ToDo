@@ -4,14 +4,16 @@ angular.module('app')
   $scope.login = function(email, password){
     Auth.login(email,password)
   }
+
+  $scope.signup = function (email,password) {
+    Auth.signup(email, password);
+  };
 })
 
 
 .factory('Auth', function($http, $window){
 
   var login = function(email,password){
-    //store in local storage
-    localStorage.setItem('email', email);
 
     //send to server
     return $http.get('/login', {
@@ -20,6 +22,7 @@ angular.module('app')
       if (res.token === false){
         console.log('Wrong password')
       } else {
+        localStorage.setItem('email', email);
         console.log('success in login!', res)
         localStorage.setItem('token',res.token)
         $window.location.href = '#/list'
@@ -27,9 +30,22 @@ angular.module('app')
     })
   }
 
+  var signup = function (email, password) {
+    return $http.get('/signup', {
+      params: {email: email, password: password}
+    })
+    .success(function(res){
+      localStorage.setItem('email', email);
+      // console.log('Success in signup')
+      localStorage.setItem('token',res.token)
+      $window.location.href = '#/list'
+    })
+  };
+
 
   return {
-    login: login
+    login: login,
+    signup: signup
   }
 })
 

@@ -24,7 +24,6 @@ angular.module('app', ['ngRoute'])
     var loggedIn = checkAuthFac.isLoggedIn();
 
     if(!loggedIn && next.$$route.authenticate){
-      console.log('not loggedin')
       $location.path('/login');
     } else if(loggedIn && $location.path() === '/list'){
       $location.path('/list'); 
@@ -35,7 +34,6 @@ angular.module('app', ['ngRoute'])
 .factory('checkAuthFac', function(){
 
   var isLoggedIn = function(){
-    //if token exists return true
     console.log('isLoggedIn:',localStorage.getItem('token'))
     return (!!localStorage.getItem('token'))  
   };
