@@ -11,8 +11,6 @@ app.listen(app.get('port'), function() {
 });
 app.use(express.static('./client'));
 
-app.use('/scripts', express.static('../client/bower_components'));
-
 app.get('/login', function(req,res){
   var email = req.query.email,
       pw = req.query.password,
