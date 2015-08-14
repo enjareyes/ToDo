@@ -18,26 +18,21 @@ app.get('/login', function(req,res){
       salt = bcrypt.genSaltSync(10),
       hash = bcrypt.hashSync(pw, salt);
 
-  //check DB  
-  db.select('password').from('doThings')
-    .where('email', email)
-    .then(function(result){
-      console.log(result)
-      if (result.length > 0) {
-        var result = result[0].password;
+  db('doThings').select('password')
+  .where('email',email)
+  .then(function(pw){
+    var result = result[0].password;
 
-        bcrypt.compare(pw, result, function(err, same) {
-          if (same){
-            console.log("token sending!")
-            var token = jwt.encode({email:email,pw:hash}, 'gottadodat') 
-            res.send({token: token}) 
-          } else { //wrong password
-            res.send({token: false})
-          }
-        })
+    bcrypt.compare(pw, result, function(err, same) {
+      if (same){
+        console.log("token sending!")
+        var token = jwt.encode({email:email,pw:hash}, 'gottadodat') 
+        res.send({token: token}) 
+      } else { 
+        res.send({token: false})
       }
     })
-
+  })
 })
 
 
@@ -47,22 +42,14 @@ app.get('/signup', function(req,res){
       salt = bcrypt.genSaltSync(10),
       hash = bcrypt.hashSync(pw, salt);
 
-  //check DB  
-  db.select('password').from('doThings')
-    .where('email', email)
-    .then(function(result){
-      console.log(result)
-      if (result.length === 0){ //if user not found in db
-        db('doThings').insert({ //insert the user and their info
-          email: email,
-          password: hash
-        })
-        .then(function(result){
-          var token = jwt.encode(email, 'gottadodat'); //then issue a token
-          res.send({token: token})  //send user token
-        })
-      } 
-    })
+  db('dothings').insert({
+    email:email,
+    password: hash
+  })  
+  .then(function(result){
+    var token = jwt.encode(email, 'gottadodat'); //then issue a token
+    res.send({token: token})  //send user token
+  })
 })
 
 
