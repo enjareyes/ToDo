@@ -20,15 +20,15 @@ app.get('/login', function(req,res){
 
   db('doThings').select('password')
   .where('email',email)
-  .then(function(pw){
+  .then(function(resultg){
     var result = result[0].password;
-
     bcrypt.compare(pw, result, function(err, same) {
       if (same){
-        console.log("token sending!")
         var token = jwt.encode({email:email,pw:hash}, 'gottadodat') 
         res.send({token: token}) 
-      } 
+      } else {
+        res.send({token:false})
+      }
     })
   })
 })
@@ -40,7 +40,7 @@ app.get('/signup', function(req,res){
       salt = bcrypt.genSaltSync(10),
       hash = bcrypt.hashSync(pw, salt);
 
-  db('dothings').insert({
+  db('doThings').insert({
     email:email,
     password: hash
   })  
