@@ -28,9 +28,7 @@ app.get('/login', function(req,res){
         console.log("token sending!")
         var token = jwt.encode({email:email,pw:hash}, 'gottadodat') 
         res.send({token: token}) 
-      } else { 
-        res.send({token: false})
-      }
+      } 
     })
   })
 })

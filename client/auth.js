@@ -19,14 +19,10 @@ angular.module('app')
     return $http.get('/login', {
       params: { email: email, password: password }
     }).success(function(res){
-      if (res.token === false){
-        console.log('Wrong password')
-      } else {
-        localStorage.setItem('email', email);
-        console.log('success in login!', res)
-        localStorage.setItem('token',res.token)
-        $window.location.href = '#/list'
-      }
+      localStorage.setItem('email', email);
+      console.log('success in login!', res)
+      localStorage.setItem('token',res.token)
+      $window.location.href = '#/list'
     })
   }
 
