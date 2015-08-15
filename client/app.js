@@ -13,17 +13,19 @@ angular.module('app', ['ngRoute'])
       authenticate: true
     })
     .otherwise({
-      redirectTo: '/login'
+      redirectTo: '/list'
     })
 })
 
-.run(function($rootScope, $location, checkAuthFac){
+.run(function($rootScope, $location, authFac){
   $rootScope.$on('$routeChangeStart', function(event, next){
     $rootScope.path = $location.path();
-    $rootScope.authenticate = checkAuthFac.isLoggedIn();
-    var loggedIn = checkAuthFac.isLoggedIn();
+    $rootScope.authenticate = authFac.isLoggedIn();
+    var loggedIn = authFac.isLoggedIn();
+    console.log('isLoggedIn:',localStorage.getItem('token'))
 
     if(!loggedIn && next.$$route.authenticate){
+      console.log('!loggedin')
       $location.path('/login');
     } else if(loggedIn && $location.path() === '/list'){
       $location.path('/list'); 
@@ -31,10 +33,9 @@ angular.module('app', ['ngRoute'])
   });
 })
 
-.factory('checkAuthFac', function(){
+.factory('authFac', function(){
 
   var isLoggedIn = function(){
-    console.log('isLoggedIn:',localStorage.getItem('token'))
     return (!!localStorage.getItem('token'))  
   };
 

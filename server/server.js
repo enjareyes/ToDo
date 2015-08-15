@@ -25,9 +25,7 @@ app.get('/login', function(req,res){
       if (same){
         var token = jwt.encode({email:email,pw:hash}, 'gottadodat') 
         res.send({token: token}) 
-      } else {
-        res.send({token:false})
-      }
+      } 
     })
   })
 })
@@ -43,7 +41,8 @@ app.get('/signup', function(req,res){
     email:email,
     password: hash
   })  
-  .then(function(result){
+  .then(function(){
+    console.log('yay')
     var token = jwt.encode(email, 'gottadodat'); //then issue a token
     res.send({token: token})  //send user token
   })

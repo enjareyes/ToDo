@@ -1,17 +1,23 @@
 angular.module('app')
 
 .controller('loginController', function(Auth, $scope){
-  $scope.login = function(email, password){
-    Auth.login(email,password)
+  $scope.login = function(){
+    var email = $scope.email,
+        pw = $scope.pw;
+
+    Auth.login(email,pw)
   }
 
-  $scope.signup = function (email,password) {
-    Auth.signup(email, password);
+  $scope.signup = function () {
+    var email = $scope.email,
+        pw = $scope.pw;
+
+    Auth.signup(email, pw);
   };
 })
 
 
-.factory('Auth', function($http, $location){
+.factory('Auth', function($http, $window){
 
   var login = function(email,password){
     return $http.get('/login', {
@@ -19,9 +25,9 @@ angular.module('app')
     })
     .success(function(res){
       localStorage.setItem('email', email);
-      // console.log('success in login!', res)
+      console.log('success in login!', res)
       localStorage.setItem('token',res.token)
-      $location.path = '/list'
+      $window.location.href = '#/list'
     })
   }
 
@@ -31,9 +37,9 @@ angular.module('app')
     })
     .success(function(res){
       localStorage.setItem('email', email);
-      console.log('Success in signup')
+      console.log('Success in signup',res)
       localStorage.setItem('token',res.token)
-      $location.path = '/list'
+      $window.location.href = '#/list'
     })
   };
 
