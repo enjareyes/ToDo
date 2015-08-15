@@ -19,7 +19,7 @@ app.get('/login', function(req,res){
 
   db('doThings').select('password')
   .where('email',email)
-  .then(function(resultg){
+  .then(function(result){
     var result = result[0].password;
     bcrypt.compare(pw, result, function(err, same) {
       if (same){

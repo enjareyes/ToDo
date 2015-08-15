@@ -31,7 +31,7 @@ angular.module('app')
     })
     .success(function(res){
       localStorage.setItem('email', email);
-      // console.log('Success in signup')
+      console.log('Success in signup')
       localStorage.setItem('token',res.token)
       $window.location.href = '#/list'
     })
