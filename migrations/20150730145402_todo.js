@@ -1,5 +1,5 @@
-
 exports.up = function(knex, Promise) { 
+  console.log('migrating')
   return Promise.all([
     knex.schema.createTable('doThings', function(t){
       t.increments('id').primary();
