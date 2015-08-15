@@ -4,9 +4,14 @@
   "description": "A basic to do app using Angular and Materialize",
   "main": "index.js",
   "dependencies": {
-    "bower": "^1.4.1",
+    "angular": "^1.4.3",
     "angular-route": "^1.4.0",
-    "express": "^4.13.1"   
+    "bcrypt": "^0.8.4",
+    "bower": "^1.4.1",
+    "express": "^4.13.1",
+    "jwt-simple": "^0.3.0",
+    "knex": "^0.8.6",
+    "pg": "^4.4.0"
   },
   "engines": {
     "node": "0.12.2",

@@ -4,14 +4,43 @@ angular.module('app', ['ngRoute'])
   $routeProvider 
     .when('/login', {
       templateUrl: 'signup.html',
-      controller: 'loginController'
+      controller: 'loginController',
+      authenticate: false
     })
     .when('/list', {
       templateUrl: 'list.html',
-      controller: 'listController'
+      controller: 'listController',
+      authenticate: true
     })
     .otherwise({
-      redirectTo: '/login'
+      redirectTo: '/list'
     })
 })
+
+.run(function($rootScope, $location, authFac){
+  $rootScope.$on('$routeChangeStart', function(event, next){
+    $rootScope.path = $location.path();
+    $rootScope.authenticate = authFac.isLoggedIn();
+    var loggedIn = authFac.isLoggedIn();
+    console.log('isLoggedIn:',localStorage.getItem('token'))
+
+    if(!loggedIn && next.$$route.authenticate){
+      console.log('!loggedin')
+      $location.path('/login');
+    } else if(loggedIn && $location.path() === '/list'){
+      $location.path('/list'); 
+    }
+  });
+})
+
+.factory('authFac', function(){
+
+  var isLoggedIn = function(){
+    return (!!localStorage.getItem('token'))  
+  };
+
+  return { isLoggedIn: isLoggedIn};
+})
+
+
 

@@ -1,27 +1,52 @@
 angular.module('app')
 
 .controller('loginController', function(Auth, $scope){
-  $scope.login = function(email, password){
-    Auth.login(email,password)
+  $scope.login = function(){
+    var email = $scope.email,
+        pw = $scope.pw;
+
+    Auth.login(email,pw)
   }
+
+  $scope.signup = function () {
+    var email = $scope.email,
+        pw = $scope.pw;
+
+    Auth.signup(email, pw);
+  };
 })
 
 
-.factory('Auth', function(){
+.factory('Auth', function($http, $window){
 
   var login = function(email,password){
-    //store in local storage
-    localStorage.setItem('email', email);
-    localStorage.setItem('password', password);
-    //send to server
+    return $http.get('/login', {
+      params: { email: email, password: password }
+    })
+    .success(function(res){
+      localStorage.setItem('email', email);
+      console.log('success in login!', res)
+      localStorage.setItem('token',res.token)
+      $window.location.href = '#/list'
+    })
   }
 
-  var logout = function(){
-    localStorage.removeItem('email')
-    localStorage.removeItem('password')
-  }
+  var signup = function (email, password) {
+    return $http.get('/signup', {
+      params: {email: email, password: password}
+    })
+    .success(function(res){
+      localStorage.setItem('email', email);
+      console.log('Success in signup',res)
+      localStorage.setItem('token',res.token)
+      $window.location.href = '#/list'
+    })
+  };
 
   return {
-    login: login
+    login: login,
+    signup: signup
   }
 })
+
+
