@@ -8,14 +8,13 @@
   <div class ='container'>
 
     <div class="input-field">
-      <input type='text' placeholder="Add" ng-model='newToDo' ng-enter='addItem(newToDo)'>
+      <input type='text' placeholder="Add" ng-model='newToDo' ng-enter='addItem(newToDo); newToDo=""'>
       <i class="fa fa-plus" class="add" ng-click='addItem(newToDo)'></i>
     </div>
 
-    <p class='listItem' ng-repeat='todo in listItems'>  
+    <p class='listItem' ng-repeat='todo in listItems'>
       {{todo.item}} 
       <i class="fa fa-minus" ng-click='removeItem(todo.item)'></i> 
     </p> 
-
   </div>
 </div>
