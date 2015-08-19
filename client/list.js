@@ -26,7 +26,7 @@ angular.module('app')
     List.logout()
   }
 
-  $scope.getItems()
+  $scope.getItems();
 })
 
 
