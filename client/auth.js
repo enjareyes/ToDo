@@ -17,14 +17,12 @@ angular.module('app')
 })
 
 .factory('Auth', function($http, $window){
-
   var login = function(email,password){
     return $http.get('/login', {
       params: { email: email, password: password }
     })
     .success(function(res){
       localStorage.setItem('email', email);
-      console.log('success in login!', res)
       localStorage.setItem('token',res.token)
       $window.location.href = '#/list'
     })
@@ -36,7 +34,6 @@ angular.module('app')
     })
     .success(function(res){
       localStorage.setItem('email', email);
-      console.log('Success in signup',res)
       localStorage.setItem('token',res.token)
       $window.location.href = '#/list'
     })

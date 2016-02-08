@@ -42,9 +42,10 @@ app.get('/signup', function(req,res){
     password: hash
   })  
   .then(function(){
-    console.log('yay')
-    var token = jwt.encode(email, 'gottadodat'); //then issue a token
-    res.send({token: token})  //send user token
+    //issue a token
+    var token = jwt.encode(email, 'gottadodat'); 
+    //send user token
+    res.send({token: token})  
   })
 })
 
@@ -59,7 +60,6 @@ app.get('/getItems', function(req,res){
     db('listItems').select('*')
     .where('userId', newId)
     .then(function(items){
-      console.log('items',items)
       res.send({items:items})
     })
   })
