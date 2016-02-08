@@ -16,7 +16,6 @@ angular.module('app')
   };
 })
 
-
 .factory('Auth', function($http, $window){
 
   var login = function(email,password){
