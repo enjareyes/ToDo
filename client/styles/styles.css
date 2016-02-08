@@ -1,13 +1,14 @@
 body {
-  background: #ECF0F1;
+  background-color: #B0E0E6;
   font-family: Helvetica, sans-serif;
   font-weight: 100;
+  color: #0F5959;
 }
 
 h1 {
   margin-top: 3%;
   text-align: center;
-  color: #000040;
+  color: white;
 }
 
 .container{
@@ -15,7 +16,7 @@ h1 {
   margin: auto;
   border-radius: 10px;
   padding: 2%;
-  background-color: #D8DFE2;
+  color: #FF1493;
 }
 
 .listItem {
@@ -24,7 +25,7 @@ h1 {
   border-radius: 5px;
   margin-top: 1%;
   margin-bottom: 1%;
-  background-color: #68828E;
+  background: #17A697;
   color: white;
   padding: 1.5%;
 }
@@ -44,10 +45,15 @@ i {
 
 .logoutButton {
   padding: 10px;  
+  color: white;
 }
 
 .logoutButton:hover {
   text-decoration: underline;
+}
+
+.container > p { 
+  position: relative;
 }
 
 
